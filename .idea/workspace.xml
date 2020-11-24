@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="5910b5e2-8cd3-44a0-b052-bd64850684ed" name="Default Changelist" comment="" />
+    <list default="true" id="5910b5e2-8cd3-44a0-b052-bd64850684ed" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/azure.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/azure.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/variable.tf" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +37,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1kQzEdEir7EwLdvULbpIdHoYNHA" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -31,6 +58,9 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\VaporVM\AEM\backend" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\VaporVM\AEM\backend\config" />
       <recent name="D:\VaporVM\AEM\backend" />
@@ -44,12 +74,24 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1605647493046</updated>
-      <workItem from="1605647494193" duration="28584000" />
+      <workItem from="1605647494193" duration="34397000" />
+      <workItem from="1606049772004" duration="8849000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="WindowStateProjectService">
     <state x="463" y="123" key="FileChooserDialogImpl" timestamp="1605686210458">
@@ -72,9 +114,9 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1605707591083" />
-    <state x="389" y="102" width="587" height="534" key="find.popup" timestamp="1605687271327">
+    <state x="389" y="102" width="587" height="534" key="find.popup" timestamp="1606197451714">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="389" y="102" width="587" height="534" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1605687271327" />
+    <state x="389" y="102" width="587" height="534" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1606197451714" />
   </component>
 </project>

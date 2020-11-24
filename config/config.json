@@ -5,6 +5,6 @@
   },
   "production": {
     "PORT": 80,
-    "MONGODB_URI": "mongodb://13.58.169.133/AzureTerraform"
+    "MONGODB_URI": "mongodb://40.77.60.78:27017/AzureTerraform"
   }
 }
