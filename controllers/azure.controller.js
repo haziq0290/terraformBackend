@@ -266,7 +266,7 @@ module.exports.auth = (req, res, next) => {
     tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{CLIENTID}', '"' + req.body.authentication.clientID + '"');
     tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{CLIENTSECRET}', '"' + req.body.authentication.clientSecret + '"');
     tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{TENANTID}', '"' + req.body.authentication.tenantID + '"');
-    fs.writeFile('D:/VaporVM/AEM/variable.tf', tempFileShareModuleTemplate, (err) => {
+    fs.writeFile('/home/azureuser/terraform/scripts/AEM/variable.tf', tempFileShareModuleTemplate, (err) => {
         if (err) {
             console.log(err)
         }
@@ -277,7 +277,7 @@ module.exports.auth = (req, res, next) => {
 
 module.exports.second = (req, res, next) => {
     // let azureAuthentication = req.body.authentication;
-    fs.readFile('D:/VaporVM/AEM/variable.tf', function (err, data) {
+    fs.readFile('/home/azureuser/terraform/scripts/AEM/variable.tf', function (err, data) {
         if (err) {
             return console.log(err);
         } else {
@@ -299,7 +299,7 @@ module.exports.second = (req, res, next) => {
             mainVariableTemplate = mainVariableTemplate.replace('{STORAGEACCOUNTNAME}', '"' + req.body.secondScreen.fileShareStorageAccountInfo.storageAccountName + '"');
             mainVariableTemplate = mainVariableTemplate.replace('{ACCOUNTTIER}', '"' + req.body.secondScreen.fileShareStorageAccountInfo.accountTier + '"');
             mainVariableTemplate = mainVariableTemplate.replace('{STORAGEACCOUNTREPLICATIONTYPE}', '"' + req.body.secondScreen.fileShareStorageAccountInfo.storageAccountReplicationType + '"');
-            fs.writeFile('D:/VaporVM/AEM/variable.tf', mainVariableTemplate, (err) => {
+            fs.writeFile('/home/azureuser/terraform/scripts/AEM/variable.tf', mainVariableTemplate, (err) => {
                 if (err) {
                     console.log(err)
                 }
@@ -309,14 +309,15 @@ module.exports.second = (req, res, next) => {
     });
 
     for (let i = 1; i <= req.body.secondScreen.fileShareStorageAccountInfo.numOfWatchFolder; i++) {
-        let fileShareModuleTemplate = 'resource "azurerm_storage_share_directory" "watchfolder" {\n' +
+        let fileShareModuleTemplate = '\nresource "azurerm_storage_share_directory" {WATCHFOLDER} {\n' +
             '  name                 = {WATCHFOLDERNAME}\n' +
             '  share_name           = azurerm_storage_share.fileshare_2.name\n' +
             '  storage_account_name = azurerm_storage_account.vvmdev.name\n' +
-            '}';
+            '}\n';
         let tempFileShareModuleTemplate = '';
         tempFileShareModuleTemplate = fileShareModuleTemplate.replace('{WATCHFOLDERNAME}', '"folder' + i + '"');
-        fs.appendFileSync('D:/VaporVM/AEM/file_share/module.tf', tempFileShareModuleTemplate, function (err) {
+        tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{WATCHFOLDER}', '"watchfolder' + i + '"');
+        fs.appendFileSync('/home/azureuser/terraform/scripts/file_share/module.tf', tempFileShareModuleTemplate, function (err) {
             if (err) throw err;
             console.log('File Share module.tf is appended');
         });
@@ -325,7 +326,7 @@ module.exports.second = (req, res, next) => {
     res.send(JSON.stringify('variable.tf'))
 }
 module.exports.deploy = (req, res, next) => {
-    exec('ipconfig 123', (error, stdout, stderr) => {
+    exec('sh /home/azureuser/terraform.sh', (error, stdout, stderr) => {
         console.log("error++++++++++++", error)
         console.log("stdout++++++++++++", stdout)
         console.log("stderr++++++++++++", stderr)
