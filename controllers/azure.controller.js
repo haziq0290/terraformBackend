@@ -3,8 +3,150 @@ var router = express.Router();
 var fs = require('fs');
 const {exec} = require("child_process");
 
-module.exports.auth = (req, res, next) => {
+/*module.exports.auth = (req, res, next) => {
+    let tempFileShareModuleTemplate = mainVariableTemplate;
+    console.log(req.body.authentication)
+    tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{SUBSCRIPTIONID}', '"' + req.body.authentication.subscriptionID + '"');
+    tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{CLIENTID}', '"' + req.body.authentication.clientID + '"');
+    tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{CLIENTSECRET}', '"' + req.body.authentication.clientSecret + '"');
+    tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{TENANTID}', '"' + req.body.authentication.tenantID + '"');
+    if (req.body.authentication.type === 'AEM') {
+        fs.writeFile('D:/VaporVM/AEM/variable.tf', tempFileShareModuleTemplate, (err) => {
+            if (err) {
+                console.log(err)
+            }
+            console.log('File saved!');
+        });
+    } else if (req.body.authentication.type === 'WP') {
+        fs.writeFile('D:/VaporVM/AEM/variablewp.tf', tempFileShareModuleTemplate, (err) => {
+            if (err) {
+                console.log(err)
+            }
+            console.log('File saved!');
+        });
+    }
+    res.json({message: 'Authentication File saved!', status: 200})
+}
 
+module.exports.second = (req, res, next) => {
+    // let azureAuthentication = req.body.authentication;
+    fs.readFile((req.body.secondScreen.type === 'AEM') ? 'D:/VaporVM/AEM/variable.tf' :
+        (req.body.secondScreen.type === 'WP') ? 'D:/VaporVM/AEM/variablewp.tf' : '',
+        function (err, data) {
+            if (err) {
+                return console.log(err);
+            } else {
+                let mainVariableTemplate = data.toString();
+                mainVariableTemplate = mainVariableTemplate.replace('{VMNAME}', '"' + req.body.secondScreen.vmInfo.vmName + '"');
+                mainVariableTemplate = mainVariableTemplate.replace('{RGLOCATION}', '"' + req.body.secondScreen.generalInfo.resourceGroupLocation + '"');
+                mainVariableTemplate = mainVariableTemplate.replace('{RGNAME}', '"' + req.body.secondScreen.generalInfo.resourceGroupName + '"');
+                mainVariableTemplate = mainVariableTemplate.replace('{INSTTYPE}', '"' + req.body.secondScreen.vmInfo.instanceType + '"');
+                mainVariableTemplate = mainVariableTemplate.replace('{SKUCAPACITY}', '"' + req.body.secondScreen.vmInfo.skuCapacity + '"');
+                mainVariableTemplate = mainVariableTemplate.replace('{ADMINUSERNAME}', '"' + req.body.secondScreen.vmInfo.adminUsername + '"');
+                mainVariableTemplate = mainVariableTemplate.replace('{SQLDBNAME}', '"' + req.body.secondScreen.sqlDatabaseInfo.sqlDatabaseName + '"');
+                mainVariableTemplate = mainVariableTemplate.replace('{SQLDBEDITION}', '"' + req.body.secondScreen.sqlDatabaseInfo.sqlDatabaseEdition + '"');
+                mainVariableTemplate = mainVariableTemplate.replace('{SQLDBCOLLATION}', '"' + req.body.secondScreen.sqlDatabaseInfo.sqlDatabaseCollation + '"');
+                mainVariableTemplate = mainVariableTemplate.replace('{SERVIVEOBJNAME}', '"' + req.body.secondScreen.sqlDatabaseInfo.serviceObjectiveName + '"');
+                mainVariableTemplate = mainVariableTemplate.replace('{SQLSERVERVERSION}', '"' + req.body.secondScreen.sqlDatabaseInfo.sqlServerVersion + '"');
+                mainVariableTemplate = mainVariableTemplate.replace('{SQLADMINUSERNAME}', '"' + req.body.secondScreen.sqlDatabaseInfo.sqlAdminUsername + '"');
+                mainVariableTemplate = mainVariableTemplate.replace('{SQLPASSWORD}', '"' + req.body.secondScreen.sqlDatabaseInfo.sqlPassword + '"');
+                mainVariableTemplate = mainVariableTemplate.replace('{SQLSERVERNAME}', '"' + req.body.secondScreen.sqlDatabaseInfo.sqlServerName + '"');
+                mainVariableTemplate = mainVariableTemplate.replace('{STORAGEACCOUNTNAME}', '"' + req.body.secondScreen.fileShareStorageAccountInfo.storageAccountName + '"');
+                mainVariableTemplate = mainVariableTemplate.replace('{ACCOUNTTIER}', '"' + req.body.secondScreen.fileShareStorageAccountInfo.accountTier + '"');
+                mainVariableTemplate = mainVariableTemplate.replace('{STORAGEACCOUNTREPLICATIONTYPE}', '"' + req.body.secondScreen.fileShareStorageAccountInfo.storageAccountReplicationType + '"');
+                fs.writeFile((req.body.secondScreen.type === 'AEM') ? 'D:/VaporVM/AEM/variable.tf' :
+                    (req.body.secondScreen.type === 'WP') ? 'D:/VaporVM/AEM/variablewp.tf' : '', mainVariableTemplate,
+                    (err) => {
+                        if (err) {
+                            console.log(err)
+                        }
+                        console.log('File saved!');
+                    });
+            }
+        });
+    if (req.body.secondScreen.type === 'AEM') {
+        for (let i = 1; i <= req.body.secondScreen.fileShareStorageAccountInfo.numOfWatchFolder; i++) {
+            let fileShareModuleTemplate = '\nresource "azurerm_storage_share_directory" {WATCHFOLDER} {\n' +
+                '  name                 = {WATCHFOLDERNAME}\n' +
+                '  share_name           = azurerm_storage_share.fileshare_2.name\n' +
+                '  storage_account_name = azurerm_storage_account.vvmdev.name\n' +
+                '}\n';
+            let tempFileShareModuleTemplate = '';
+            tempFileShareModuleTemplate = fileShareModuleTemplate.replace('{WATCHFOLDERNAME}', '"folder' + i + '"');
+            tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{WATCHFOLDER}', '"watchfolder' + i + '"');
+            fs.appendFileSync('D:/VaporVM/AEM/file_share/module.tf', tempFileShareModuleTemplate, function (err) {
+                if (err) throw err;
+                console.log('File Share module.tf is appended');
+            });
+        }
+    }
+
+    res.send(JSON.stringify('variable.tf'))
+}*/
+
+module.exports.deploy = (req, res, next) => {
+    exec('sh /home/azureuser/terraform.sh', (error, stdout, stderr) => {
+        if (error) {
+            res.json({message: {error}, status: 400})
+        }
+        if (stderr) {
+            res.json({message: {stderr}, status: 400})
+        }
+        res.json({message: 'Terraform is deployed', status: 200})
+    });
+}
+
+module.exports.cli = (req, res, next) => {
+    exec('ipconfig', (error, stdout, stderr) => {
+        if (error) {
+            res.json({message: {error}, status: 400})
+        }
+        if (stderr) {
+            res.json({message: {stderr}, status: 400})
+        }
+        fs.readFile('D:/VaporVM/AEM/backend/code.txt',
+            function (err, data) {
+                if (err) {
+                    return console.log(err);
+                } else {
+                    console.log(data)
+                    res.json({message: data.toString(), status: 200})
+                }
+            })
+    });
+    /*    exec('sh /home/azureuser/terraform.sh', (error, stdout, stderr) => {
+            console.log("error++++++++++++", error)
+            console.log("stdout++++++++++++", stdout)
+            console.log("stderr++++++++++++", stderr)
+            if (error) {
+                res.json({message: {error}, status: 400})
+            }
+            if (stderr) {
+                res.json({message: {stderr}, status: 400})
+            }
+            fs.readFile((req.body.secondScreen.type === 'AEM') ? 'D:/VaporVM/AEM/variable.tf' :
+                (req.body.secondScreen.type === 'WP') ? 'D:/VaporVM/AEM/variablewp.tf' : '',
+                function (err, data) {
+                    if (err) {
+                        return console.log(err);
+                    } else {
+                    }
+                })
+            res.json({message: 'Terraform is deployed', status: 200})
+        });*/
+}
+
+module.exports.subscription = (req, res, next) => {
+    fs.readFile('D:/VaporVM/AEM/backend/subList.json', function (err, data) {
+        if (err) {
+            return console.log(err);
+        } else {
+            let jsonData = JSON.parse(data);
+            res.json(jsonData)
+        }
+    })
+}
+module.exports.setsubs = (req, res, next) => {
     let mainVariableTemplate = '#-----------------------------------------------------------------------------\n' +
         '# Azure Subscription variables\n' +
         '#-----------------------------------------------------------------------------\n' +
@@ -260,82 +402,34 @@ module.exports.auth = (req, res, next) => {
         '\n' +
         '\n'
 
-    let tempFileShareModuleTemplate = mainVariableTemplate;
-    console.log(req.body.authentication)
-    tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{SUBSCRIPTIONID}', '"' + req.body.authentication.subscriptionID + '"');
-    tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{CLIENTID}', '"' + req.body.authentication.clientID + '"');
-    tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{CLIENTSECRET}', '"' + req.body.authentication.clientSecret + '"');
-    tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{TENANTID}', '"' + req.body.authentication.tenantID + '"');
-    fs.writeFile('/home/azureuser/terraform/scripts/AEM/variable.tf', tempFileShareModuleTemplate, (err) => {
-        if (err) {
-            console.log(err)
-        }
-        console.log('File saved!');
-    });
-    res.json({message: 'Authentication File saved!', status: 200})
-}
-
-module.exports.second = (req, res, next) => {
-    // let azureAuthentication = req.body.authentication;
-    fs.readFile('/home/azureuser/terraform/scripts/AEM/variable.tf', function (err, data) {
-        if (err) {
-            return console.log(err);
-        } else {
-            let mainVariableTemplate = data.toString();
-            mainVariableTemplate = mainVariableTemplate.replace('{VMNAME}', '"' + req.body.secondScreen.vmInfo.vmName + '"');
-            mainVariableTemplate = mainVariableTemplate.replace('{RGLOCATION}', '"' + req.body.secondScreen.generalInfo.resourceGroupLocation + '"');
-            mainVariableTemplate = mainVariableTemplate.replace('{RGNAME}', '"' + req.body.secondScreen.generalInfo.resourceGroupName + '"');
-            mainVariableTemplate = mainVariableTemplate.replace('{INSTTYPE}', '"' + req.body.secondScreen.vmInfo.instanceType + '"');
-            mainVariableTemplate = mainVariableTemplate.replace('{SKUCAPACITY}', '"' + req.body.secondScreen.vmInfo.skuCapacity + '"');
-            mainVariableTemplate = mainVariableTemplate.replace('{ADMINUSERNAME}', '"' + req.body.secondScreen.vmInfo.adminUsername + '"');
-            mainVariableTemplate = mainVariableTemplate.replace('{SQLDBNAME}', '"' + req.body.secondScreen.sqlDatabaseInfo.sqlDatabaseName + '"');
-            mainVariableTemplate = mainVariableTemplate.replace('{SQLDBEDITION}', '"' + req.body.secondScreen.sqlDatabaseInfo.sqlDatabaseEdition + '"');
-            mainVariableTemplate = mainVariableTemplate.replace('{SQLDBCOLLATION}', '"' + req.body.secondScreen.sqlDatabaseInfo.sqlDatabaseCollation + '"');
-            mainVariableTemplate = mainVariableTemplate.replace('{SERVIVEOBJNAME}', '"' + req.body.secondScreen.sqlDatabaseInfo.serviceObjectiveName + '"');
-            mainVariableTemplate = mainVariableTemplate.replace('{SQLSERVERVERSION}', '"' + req.body.secondScreen.sqlDatabaseInfo.sqlServerVersion + '"');
-            mainVariableTemplate = mainVariableTemplate.replace('{SQLADMINUSERNAME}', '"' + req.body.secondScreen.sqlDatabaseInfo.sqlAdminUsername + '"');
-            mainVariableTemplate = mainVariableTemplate.replace('{SQLPASSWORD}', '"' + req.body.secondScreen.sqlDatabaseInfo.sqlPassword + '"');
-            mainVariableTemplate = mainVariableTemplate.replace('{SQLSERVERNAME}', '"' + req.body.secondScreen.sqlDatabaseInfo.sqlServerName + '"');
-            mainVariableTemplate = mainVariableTemplate.replace('{STORAGEACCOUNTNAME}', '"' + req.body.secondScreen.fileShareStorageAccountInfo.storageAccountName + '"');
-            mainVariableTemplate = mainVariableTemplate.replace('{ACCOUNTTIER}', '"' + req.body.secondScreen.fileShareStorageAccountInfo.accountTier + '"');
-            mainVariableTemplate = mainVariableTemplate.replace('{STORAGEACCOUNTREPLICATIONTYPE}', '"' + req.body.secondScreen.fileShareStorageAccountInfo.storageAccountReplicationType + '"');
-            fs.writeFile('/home/azureuser/terraform/scripts/AEM/variable.tf', mainVariableTemplate, (err) => {
-                if (err) {
-                    console.log(err)
+    fs.writeFile('subscription.txt', req.body.selectedSubs, function (err) {
+        if (err) return console.log(err);
+        else {
+            let tempFileShareModuleTemplate = mainVariableTemplate;
+            fs.readFile('authentication.json', (err, jsonData) => {
+                let data1 = JSON.parse(jsonData);
+                console.log("data", data1)
+                if (data1.length == 0) {
+                } else {
+                    tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{SUBSCRIPTIONID}', '"' + req.body.selectedSubs + '"');
+                    tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{CLIENTID}', '"' + data1.appId + '"');
+                    tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{CLIENTSECRET}', '"' + data1.password + '"');
+                    tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{TENANTID}', '"' + data1.tenant + '"');
+                    fs.writeFile('D:/VaporVM/AEM/variable.tf', tempFileShareModuleTemplate, (err) => {
+                        if (err) {
+                            console.log(err)
+                        }
+                        console.log('File saved!');
+                    });
+                    fs.writeFile('D:/VaporVM/AEM/variablewp.tf', tempFileShareModuleTemplate, (err) => {
+                        if (err) {
+                            console.log(err)
+                        }
+                        console.log('File saved!');
+                    });
                 }
-                console.log('File saved!');
+                res.json({message: "Done", status: 200})
             });
         }
-    });
-
-    for (let i = 1; i <= req.body.secondScreen.fileShareStorageAccountInfo.numOfWatchFolder; i++) {
-        let fileShareModuleTemplate = '\nresource "azurerm_storage_share_directory" {WATCHFOLDER} {\n' +
-            '  name                 = {WATCHFOLDERNAME}\n' +
-            '  share_name           = azurerm_storage_share.fileshare_2.name\n' +
-            '  storage_account_name = azurerm_storage_account.vvmdev.name\n' +
-            '}\n';
-        let tempFileShareModuleTemplate = '';
-        tempFileShareModuleTemplate = fileShareModuleTemplate.replace('{WATCHFOLDERNAME}', '"folder' + i + '"');
-        tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{WATCHFOLDER}', '"watchfolder' + i + '"');
-        fs.appendFileSync('/home/azureuser/terraform/scripts/file_share/module.tf', tempFileShareModuleTemplate, function (err) {
-            if (err) throw err;
-            console.log('File Share module.tf is appended');
-        });
-    }
-
-    res.send(JSON.stringify('variable.tf'))
-}
-module.exports.deploy = (req, res, next) => {
-    exec('sh /home/azureuser/terraform.sh', (error, stdout, stderr) => {
-        console.log("error++++++++++++", error)
-        console.log("stdout++++++++++++", stdout)
-        console.log("stderr++++++++++++", stderr)
-        if (error) {
-            res.json({message: {error}, status: 400})
-        }
-        if (stderr) {
-            res.json({message: {stderr}, status: 400})
-        }
-        res.json({message: 'Terraform is deployed', status: 200})
     });
 }

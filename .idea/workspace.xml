@@ -21,9 +21,11 @@
   <component name="ChangeListManager">
     <list default="true" id="5910b5e2-8cd3-44a0-b052-bd64850684ed" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/azure.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/azure.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/variable.tf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/azure.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/azure.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +43,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1kQzEdEir7EwLdvULbpIdHoYNHA" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -52,9 +56,10 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.18.4" />
     <property name="javascript.nodejs.core.library.typings.version" value="12.19.4" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Techexperts/Aws Services/backend" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.2.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -75,7 +80,9 @@
       <option name="presentableId" value="Default" />
       <updated>1605647493046</updated>
       <workItem from="1605647494193" duration="34397000" />
-      <workItem from="1606049772004" duration="8849000" />
+      <workItem from="1606049772004" duration="30568000" />
+      <workItem from="1609843280970" duration="4557000" />
+      <workItem from="1610349272465" duration="23649000" />
     </task>
     <servers />
   </component>
@@ -92,6 +99,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="463" y="123" key="FileChooserDialogImpl" timestamp="1605686210458">
@@ -114,9 +122,21 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1605707591083" />
-    <state x="389" y="102" width="587" height="534" key="find.popup" timestamp="1606197451714">
+    <state x="92" y="92" width="1182" height="554" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1609925541851">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="389" y="102" width="587" height="534" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1606197451714" />
+    <state x="92" y="92" width="1182" height="554" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.738@0.0.1366.738" timestamp="1609925541851" />
+    <state x="92" y="92" width="1182" height="554" maximized="true" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog" timestamp="1609925541851">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="92" y="92" width="1182" height="554" maximized="true" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog/0.0.1366.738@0.0.1366.738" timestamp="1609925541851" />
+    <state x="500" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1610445345778">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="500" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.738@0.0.1366.738" timestamp="1610445345778" />
+    <state x="89" y="20" width="1208" height="688" key="find.popup" timestamp="1610445569223">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="89" y="20" width="1208" height="688" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1610445569223" />
   </component>
 </project>
