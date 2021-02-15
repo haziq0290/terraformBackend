@@ -13,7 +13,31 @@
   },
   {
     "cloudName": "AzureCloud1",
-    "id": "wegfuyg-y4yg-hryv-hfy5-nmbnv23273",
+    "id": "ansdajs-y4yg-hryv-hfy5-nmbnv23273",
+    "isDefault": true,
+    "name": "Free Subscription",
+    "state": "Enabled",
+    "tenantId": "wegfuyg-y4yg-hryv-hfy5-nmbnv23273",
+    "user": {
+      "name": "user@example.com",
+      "type": "user"
+    }
+  },
+  {
+    "cloudName": "AzureCloud2",
+    "id": "mabvhjas-y4yg-hryv-hfy5-nmbnv23273",
+    "isDefault": true,
+    "name": "Free Subscription",
+    "state": "Enabled",
+    "tenantId": "wegfuyg-y4yg-hryv-hfy5-nmbnv23273",
+    "user": {
+      "name": "user@example.com",
+      "type": "user"
+    }
+  },
+  {
+    "cloudName": "AzureCloud3",
+    "id": "jnsfbkh-y4yg-hryv-hfy5-nmbnv23273",
     "isDefault": true,
     "name": "Free Subscription",
     "state": "Enabled",

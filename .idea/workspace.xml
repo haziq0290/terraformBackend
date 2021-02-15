@@ -22,10 +22,9 @@
     <list default="true" id="5910b5e2-8cd3-44a0-b052-bd64850684ed" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/azure.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/azure.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/azure.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/azure.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subList.json" beforeDir="false" afterPath="$PROJECT_DIR$/subList.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subscription.txt" beforeDir="false" afterPath="$PROJECT_DIR$/subscription.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +55,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.18.4" />
     <property name="javascript.nodejs.core.library.typings.version" value="12.19.4" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../frontend/aem" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.2.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
@@ -82,7 +81,9 @@
       <workItem from="1605647494193" duration="34397000" />
       <workItem from="1606049772004" duration="30568000" />
       <workItem from="1609843280970" duration="4557000" />
-      <workItem from="1610349272465" duration="23649000" />
+      <workItem from="1610349272465" duration="28216000" />
+      <workItem from="1610621746886" duration="2280000" />
+      <workItem from="1613376809806" duration="2753000" />
     </task>
     <servers />
   </component>
@@ -102,10 +103,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="463" y="123" key="FileChooserDialogImpl" timestamp="1605686210458">
+    <state x="463" y="123" key="FileChooserDialogImpl" timestamp="1613378477479">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="463" y="123" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1605686210458" />
+    <state x="463" y="123" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1613378477479" />
     <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1605707591083">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -134,9 +135,9 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="500" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.738@0.0.1366.738" timestamp="1610445345778" />
-    <state x="89" y="20" width="1208" height="688" key="find.popup" timestamp="1610445569223">
+    <state x="89" y="20" width="1208" height="688" key="find.popup" timestamp="1613379084048">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="89" y="20" width="1208" height="688" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1610445569223" />
+    <state x="89" y="20" width="1208" height="688" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1613379084048" />
   </component>
 </project>
