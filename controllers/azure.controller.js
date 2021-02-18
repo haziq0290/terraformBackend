@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 const {exec} = require("child_process");
-
+const { promisify } = require('util')
+const sleep = promisify(setTimeout)
 /*module.exports.auth = (req, res, next) => {
     let tempFileShareModuleTemplate = mainVariableTemplate;
     console.log(req.body.authentication)
@@ -27,11 +28,11 @@ const {exec} = require("child_process");
     }
     res.json({message: 'Authentication File saved!', status: 200})
 }
-
+*/
 module.exports.second = (req, res, next) => {
     // let azureAuthentication = req.body.authentication;
-    fs.readFile((req.body.secondScreen.type === 'AEM') ? 'D:/VaporVM/AEM/variable.tf' :
-        (req.body.secondScreen.type === 'WP') ? 'D:/VaporVM/AEM/variablewp.tf' : '',
+    fs.readFile((req.body.secondScreen.type === 'AEM') ? '/home/azureuser/terraform/scripts/AEM/variable.tf' :
+        (req.body.secondScreen.type === 'WP') ? '/home/azureuser/wordpress/scripts/AEM/variable.tf' : '',
         function (err, data) {
             if (err) {
                 return console.log(err);
@@ -54,8 +55,8 @@ module.exports.second = (req, res, next) => {
                 mainVariableTemplate = mainVariableTemplate.replace('{STORAGEACCOUNTNAME}', '"' + req.body.secondScreen.fileShareStorageAccountInfo.storageAccountName + '"');
                 mainVariableTemplate = mainVariableTemplate.replace('{ACCOUNTTIER}', '"' + req.body.secondScreen.fileShareStorageAccountInfo.accountTier + '"');
                 mainVariableTemplate = mainVariableTemplate.replace('{STORAGEACCOUNTREPLICATIONTYPE}', '"' + req.body.secondScreen.fileShareStorageAccountInfo.storageAccountReplicationType + '"');
-                fs.writeFile((req.body.secondScreen.type === 'AEM') ? 'D:/VaporVM/AEM/variable.tf' :
-                    (req.body.secondScreen.type === 'WP') ? 'D:/VaporVM/AEM/variablewp.tf' : '', mainVariableTemplate,
+                fs.writeFile((req.body.secondScreen.type === 'AEM') ? '/home/azureuser/terraform/scripts/AEM/variable.tf' :
+                    (req.body.secondScreen.type === 'WP') ? '/home/azureuser/wordpress/scripts/AEM/variable.tf' : '', mainVariableTemplate,
                     (err) => {
                         if (err) {
                             console.log(err)
@@ -74,7 +75,7 @@ module.exports.second = (req, res, next) => {
             let tempFileShareModuleTemplate = '';
             tempFileShareModuleTemplate = fileShareModuleTemplate.replace('{WATCHFOLDERNAME}', '"folder' + i + '"');
             tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{WATCHFOLDER}', '"watchfolder' + i + '"');
-            fs.appendFileSync('D:/VaporVM/AEM/file_share/module.tf', tempFileShareModuleTemplate, function (err) {
+            fs.appendFileSync('/home/azureuser/terraform/scripts/file_share/module.tf', tempFileShareModuleTemplate, function (err) {
                 if (err) throw err;
                 console.log('File Share module.tf is appended');
             });
@@ -82,29 +83,68 @@ module.exports.second = (req, res, next) => {
     }
 
     res.send(JSON.stringify('variable.tf'))
-}*/
-
-module.exports.deploy = (req, res, next) => {
-    exec('sh /home/azureuser/terraform.sh', (error, stdout, stderr) => {
-        if (error) {
-            res.json({message: {error}, status: 400})
-        }
-        if (stderr) {
-            res.json({message: {stderr}, status: 400})
-        }
-        res.json({message: 'Terraform is deployed', status: 200})
-    });
 }
 
+
+module.exports.deploy = (req, res, next) => {
+    if (req.body.deployType === 'T') {
+        exec('sh /home/azureuser/terraform.sh',{maxBuffer: 1024 * 1024}, (error, stdout, stderr) => {
+            if (error) {
+                res.json({message: {error}, status: 400})
+            }
+            if (stderr) {
+                res.json({message: {stderr}, status: 400})
+            }
+            res.json({message: 'Terraform is deployed', status: 200})
+        });
+    } else if (req.body.deployType === 'WP') {
+        exec('sh /home/azureuser/wordpress.sh',{maxBuffer: 1024 * 1024}, (error, stdout, stderr) => {
+            if (error) {
+                res.json({message: {error}, status: 400})
+            }
+            if (stderr) {
+                res.json({message: {stderr}, status: 400})
+            }
+            res.json({message: 'Wordpress is deployed', status: 200})
+        });
+    }
+}
+
+var shell = require('shelljs');
 module.exports.cli = (req, res, next) => {
-    exec('ipconfig', (error, stdout, stderr) => {
+//	shell.exec('cd / & ./home/azauth.sh')
+//	shell.exec('./azauth.sh')
+    exec('./azauth.sh', (error, stdout, stderr) => {
         if (error) {
             res.json({message: {error}, status: 400})
         }
         if (stderr) {
             res.json({message: {stderr}, status: 400})
-        }
-        fs.readFile('D:/VaporVM/AEM/backend/code.txt',
+       }
+ });
+	sleep(5000).then(() => {
+  fs.readFile('/home/azureuser/terraformBackend/code.txt',
+            function (err, data) {
+                if (err) {
+                    return console.log(err);
+                } else {
+                    console.log(data)
+                    res.json({message: data.toString(), status: 200})
+                }
+            });
+
+})
+/*       fs.readFile('/home/azureuser/terraformBackend/code.txt',
+            function (err, data) {
+                if (err) {
+                    return console.log(err);
+                } else {
+                    console.log(data)
+                    res.json({message: data.toString(), status: 200})
+                }
+            });
+*/   /* 
+	 fs.readFile('/home/azureuser/code.txt',
             function (err, data) {
                 if (err) {
                     return console.log(err);
@@ -113,31 +153,13 @@ module.exports.cli = (req, res, next) => {
                     res.json({message: data.toString(), status: 200})
                 }
             })
-    });
-    /*    exec('sh /home/azureuser/terraform.sh', (error, stdout, stderr) => {
-            console.log("error++++++++++++", error)
-            console.log("stdout++++++++++++", stdout)
-            console.log("stderr++++++++++++", stderr)
-            if (error) {
-                res.json({message: {error}, status: 400})
-            }
-            if (stderr) {
-                res.json({message: {stderr}, status: 400})
-            }
-            fs.readFile((req.body.secondScreen.type === 'AEM') ? 'D:/VaporVM/AEM/variable.tf' :
-                (req.body.secondScreen.type === 'WP') ? 'D:/VaporVM/AEM/variablewp.tf' : '',
-                function (err, data) {
-                    if (err) {
-                        return console.log(err);
-                    } else {
-                    }
-                })
-            res.json({message: 'Terraform is deployed', status: 200})
-        });*/
+*/
+ 
 }
 
 module.exports.subscription = (req, res, next) => {
-    fs.readFile('D:/VaporVM/AEM/backend/subList.json', function (err, data) {
+  sleep(5000).then(() => {   
+	  fs.readFile('/home/azureuser/terraformBackend/subList.json', function (err, data) {
         if (err) {
             return console.log(err);
         } else {
@@ -145,6 +167,7 @@ module.exports.subscription = (req, res, next) => {
             res.json(jsonData)
         }
     })
+})
 }
 module.exports.setsubs = (req, res, next) => {
     let mainVariableTemplate = '#-----------------------------------------------------------------------------\n' +
@@ -402,11 +425,11 @@ module.exports.setsubs = (req, res, next) => {
         '\n' +
         '\n'
 
-    fs.writeFile('subscription.txt', req.body.selectedSubs, function (err) {
+/*    fs.writeFile('/home/azureuser/terraformBackend/subscription.txt', req.body.selectedSubs, function (err) {
         if (err) return console.log(err);
         else {
             let tempFileShareModuleTemplate = mainVariableTemplate;
-            fs.readFile('authentication.json', (err, jsonData) => {
+            fs.readFile('/home/azureuser/terraformBackend/auth.json', (err, jsonData) => {
                 let data1 = JSON.parse(jsonData);
                 console.log("data", data1)
                 if (data1.length == 0) {
@@ -415,13 +438,13 @@ module.exports.setsubs = (req, res, next) => {
                     tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{CLIENTID}', '"' + data1.appId + '"');
                     tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{CLIENTSECRET}', '"' + data1.password + '"');
                     tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{TENANTID}', '"' + data1.tenant + '"');
-                    fs.writeFile('D:/VaporVM/AEM/variable.tf', tempFileShareModuleTemplate, (err) => {
+                    fs.writeFile('/home/azureuser/terraform/scripts/AEM/variable.tf', tempFileShareModuleTemplate, (err) => {
                         if (err) {
                             console.log(err)
                         }
                         console.log('File saved!');
                     });
-                    fs.writeFile('D:/VaporVM/AEM/variablewp.tf', tempFileShareModuleTemplate, (err) => {
+                    fs.writeFile('/home/azureuser/wordpress/scripts/AEM/variable.tf', tempFileShareModuleTemplate, (err) => {
                         if (err) {
                             console.log(err)
                         }
@@ -430,6 +453,44 @@ module.exports.setsubs = (req, res, next) => {
                 }
                 res.json({message: "Done", status: 200})
             });
+        }
+    });*/
+	fs.writeFile('/home/azureuser/terraformBackend/subscription.txt', req.body.selectedSubs, function (err) {
+        if (err) return console.log(err);
+        else {
+            const checkTime = 7000;
+            const timerId = setInterval(() => {
+                const isExists = fs.existsSync('/home/azureuser/terraformBackend/auth.json')
+                if (isExists) {
+
+                    let tempFileShareModuleTemplate = mainVariableTemplate;
+                    fs.readFile('/home/azureuser/terraformBackend/auth.json', (err, jsonData) => {
+                        let data1 = JSON.parse(jsonData);
+                        console.log("data", data1)
+                        if (data1.length == 0) {
+                        } else {
+                            tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{SUBSCRIPTIONID}', '"' + req.body.selectedSubs + '"');
+                            tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{CLIENTID}', '"' + data1.appId + '"');
+                            tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{CLIENTSECRET}', '"' + data1.password + '"');
+                            tempFileShareModuleTemplate = tempFileShareModuleTemplate.replace('{TENANTID}', '"' + data1.tenant + '"');
+                            fs.writeFile('/home/azureuser/terraform/scripts/AEM/variable.tf', tempFileShareModuleTemplate, (err) => {
+                                if (err) {
+                                    console.log(err)
+                                }
+                                console.log('File saved!');
+                            });
+                            fs.writeFile('/home/azureuser/wordpress/scripts/AEM/variable.tf', tempFileShareModuleTemplate, (err) => {
+                                if (err) {
+                                    console.log(err)
+                                }
+                                console.log('File saved!');
+                            });
+                        }
+                        res.json({message: "Done", status: 200})
+                    });
+                    clearInterval(timerId)
+                }
+            }, checkTime)
         }
     });
 }
