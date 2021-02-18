@@ -1,1 +1,21 @@
-To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code DX52S8BSB to authenticate.
+To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code REK8P7FVT to authenticate.
+[
+  {
+    "cloudName": "AzureCloud",
+    "homeTenantId": "2b7de69d-c181-4224-ba00-be46ae2eaa31",
+    "id": "283063f9-88a5-4519-a6af-44d7d7ed3908",
+    "isDefault": true,
+    "managedByTenants": [
+      {
+        "tenantId": "2f4a9838-26b7-47ee-be60-ccc1fdec5953"
+      }
+    ],
+    "name": "Microsoft Azure (ijetae): #1426107",
+    "state": "Enabled",
+    "tenantId": "2b7de69d-c181-4224-ba00-be46ae2eaa31",
+    "user": {
+      "name": "admin@ijetae.onmicrosoft.com",
+      "type": "user"
+    }
+  }
+]

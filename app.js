@@ -19,6 +19,13 @@ app.use(cors());
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
+});
+app.use(function(req,res,next){
+	res.setHeader('Access-Control-Allow-Origin','*'); //http://localhost:3000,
+	res.setHeader('Access-Control-Allow-Methods','GET, POST, OPTIONS, PUT,PATCH, DELETE');
+	res.setHeader('Access-Control-Allow-Headers','*');
+	res.setHeader('Access-Control-Allow-Credentials','true');
+	next();
 });*/
 app.use(logger('dev'));
 app.use(express.json());

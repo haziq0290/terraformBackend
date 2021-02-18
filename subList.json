@@ -1,49 +1,33 @@
 [
   {
     "cloudName": "AzureCloud",
-    "id": "63gf84j-y4yg-hryv-hfy5-tg583bv65h84",
-    "isDefault": true,
-    "name": "PAYG Subscription",
+    "homeTenantId": "1f9a4964-1c02-412d-961a-454c7977e1e8",
+    "id": "d90d4165-0640-43b6-80eb-b206af9a6faf",
+    "isDefault": false,
+    "managedByTenants": [],
+    "name": "Azure subscription 1",
     "state": "Enabled",
-    "tenantId": "63gf84j-y4yg-hryv-hfy5-tg583bv65h84",
+    "tenantId": "1f9a4964-1c02-412d-961a-454c7977e1e8",
     "user": {
-      "name": "user@example.com",
+      "name": "vaporvm.managex@outlook.com",
       "type": "user"
     }
   },
   {
-    "cloudName": "AzureCloud1",
-    "id": "ansdajs-y4yg-hryv-hfy5-nmbnv23273",
+    "cloudName": "AzureCloud",
+    "homeTenantId": "2b7de69d-c181-4224-ba00-be46ae2eaa31",
+    "id": "283063f9-88a5-4519-a6af-44d7d7ed3908",
     "isDefault": true,
-    "name": "Free Subscription",
+    "managedByTenants": [
+      {
+        "tenantId": "2f4a9838-26b7-47ee-be60-ccc1fdec5953"
+      }
+    ],
+    "name": "Microsoft Azure (ijetae): #1426107",
     "state": "Enabled",
-    "tenantId": "wegfuyg-y4yg-hryv-hfy5-nmbnv23273",
+    "tenantId": "2b7de69d-c181-4224-ba00-be46ae2eaa31",
     "user": {
-      "name": "user@example.com",
-      "type": "user"
-    }
-  },
-  {
-    "cloudName": "AzureCloud2",
-    "id": "mabvhjas-y4yg-hryv-hfy5-nmbnv23273",
-    "isDefault": true,
-    "name": "Free Subscription",
-    "state": "Enabled",
-    "tenantId": "wegfuyg-y4yg-hryv-hfy5-nmbnv23273",
-    "user": {
-      "name": "user@example.com",
-      "type": "user"
-    }
-  },
-  {
-    "cloudName": "AzureCloud3",
-    "id": "jnsfbkh-y4yg-hryv-hfy5-nmbnv23273",
-    "isDefault": true,
-    "name": "Free Subscription",
-    "state": "Enabled",
-    "tenantId": "wegfuyg-y4yg-hryv-hfy5-nmbnv23273",
-    "user": {
-      "name": "user@example.com",
+      "name": "admin@ijetae.onmicrosoft.com",
       "type": "user"
     }
   }
