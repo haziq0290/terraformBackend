@@ -88,7 +88,7 @@ module.exports.second = (req, res, next) => {
 
 module.exports.deploy = (req, res, next) => {
     if (req.body.deployType === 'T') {
-        exec('sh /home/azureuser/terraform.sh',{maxBuffer: 1024 * 1024}, (error, stdout, stderr) => {
+        exec('sh /home/azureuser/terraform.sh',{maxBuffer: Infinity}, (error, stdout, stderr) => {
             if (error) {
                 res.json({message: {error}, status: 400})
             }
@@ -122,7 +122,7 @@ module.exports.cli = (req, res, next) => {
             res.json({message: {stderr}, status: 400})
        }
  });
-	sleep(5000).then(() => {
+	sleep(7000).then(() => {
   fs.readFile('/home/azureuser/terraformBackend/code.txt',
             function (err, data) {
                 if (err) {

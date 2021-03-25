@@ -1,4 +1,4 @@
-To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code REK8P7FVT to authenticate.
+To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code APFS4HZNB to authenticate.
 [
   {
     "cloudName": "AzureCloud",
