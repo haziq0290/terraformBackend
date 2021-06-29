@@ -9,6 +9,7 @@ router.post('/deploy', azureCtrl.deploy);
 router.post('/cli', azureCtrl.cli);
 router.post('/subscription', azureCtrl.subscription);
 router.post('/setsubs', azureCtrl.setsubs);
+router.post('/reset', azureCtrl.reset);
 // router.post('/authenticate', userCtrl.authenticate);
 
 module.exports = router;

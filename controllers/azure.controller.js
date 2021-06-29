@@ -110,6 +110,30 @@ module.exports.deploy = (req, res, next) => {
     }
 }
 
+module.exports.reset = (req, res, next) => {
+    if (req.body.resetType === 'T') {
+        exec('sh /home/azureuser/terraform.sh', (error, stdout, stderr) => {
+            if (error) {
+                res.json({message: {error}, status: 400})
+            }
+            if (stderr) {
+                res.json({message: {stderr}, status: 400})
+            }
+            res.json({message: 'Terraform Script reset', status: 200})
+        });
+    } else if (req.body.resetType === 'WP') {
+        exec('sh /home/azureuser/wordpress.sh', (error, stdout, stderr) => {
+            if (error) {
+                res.json({message: {error}, status: 400})
+            }
+            if (stderr) {
+                res.json({message: {stderr}, status: 400})
+            }
+            res.json({message: 'Wordpress Script reset', status: 200})
+        });
+    }
+}
+
 var shell = require('shelljs');
 module.exports.cli = (req, res, next) => {
 //	shell.exec('cd / & ./home/azauth.sh')
